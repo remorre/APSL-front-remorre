@@ -1,0 +1,19 @@
+{
+    "projects": [
+        {
+            "name": "APSL",
+            "path": "./sources/temp/contract.tact",
+            "output": "./sources/temp/output",
+            "mode": "full",
+            "options": {
+                "external": false,
+                "debug": false,
+                "ipfsAbiGetter": false,
+                "interfacesGetter": false,
+                "experimental": {
+                    "inline": false
+                }
+            }
+        }
+    ]
+}
