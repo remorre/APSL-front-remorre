@@ -14,8 +14,6 @@ import AnimatedBackground from './Components/Animate';
 import NotFoundPage from './Pages/NotFoundPage';
 import ExchengePage from './Pages/ExchengePage';
 import ChatPage from './Pages/ChatPage';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import './App.css';
 
 function WalletChecker({ children }: { children: React.ReactNode }) {
@@ -85,8 +83,6 @@ function App() {
 					<Footer />
 				</WalletChecker>
 			</TonConnectUIProvider>
-			<Analytics />
-			<SpeedInsights />
 		</div>
 	);
 }
