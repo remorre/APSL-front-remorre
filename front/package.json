@@ -13,6 +13,8 @@
     "@ton/core": "^0.59.0",
     "@tonconnect/ui": "^2.0.9",
     "@tonconnect/ui-react": "^2.0.9",
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.7",
     "buffer": "^6.0.3",
     "framer-motion": "^11.11.9",
