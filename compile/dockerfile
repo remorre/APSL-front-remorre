@@ -1,0 +1,23 @@
+# Используем Node.js 23
+FROM node:23
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем package.json и yarn.lock
+COPY package.json yarn.lock ./
+
+# Устанавливаем зависимости
+RUN yarn install
+
+# Копируем исходный код
+COPY . .
+
+# Устанавливаем ts-node глобально (если нужно)
+RUN yarn global add ts-node
+
+# Открываем порт 3000
+EXPOSE 3000
+
+# Запускаем сервер с помощью ts-node
+CMD ["ts-node", "server.ts"]
