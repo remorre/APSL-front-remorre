@@ -10,7 +10,7 @@ import cors from 'cors';
 
 const app = express();
 const httpServer = createServer(app);
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+const allowedOrigins = ['https://apsl.space'];
 const io = new Server(httpServer, {
 	cors: {
 		origin: (origin, callback) => {
