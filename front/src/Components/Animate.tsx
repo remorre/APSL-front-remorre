@@ -14,13 +14,13 @@ class Star {
 	constructor(x?: number, y?: number, radius?: number, color?: string) {
 		this.x = x || Math.random() * window.innerWidth;
 		this.y = y || Math.random() * window.innerHeight;
-		this.radius = radius || Math.random() * 1;
+		this.radius = radius || Math.random() * 0.9;
 		this.color =
 			color ||
 			['#176ab6', '#f8bab6', '#fff', '#49d1f6', '#e4a8e6'][
 				Math.floor(Math.random() * 5)
 			];
-		this.dy = -Math.random() * 0.4;
+		this.dy = -Math.random() * 0.23;
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
@@ -52,7 +52,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const stars: Star[] = [];
-	const n_stars = 400;
+	const n_stars = 250;
 
 	useEffect(() => {
 		const canvas = canvasRef.current;

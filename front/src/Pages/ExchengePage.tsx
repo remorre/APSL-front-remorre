@@ -154,7 +154,7 @@ export default function ExchengePage() {
 										{task.title}
 									</h4>
 									<h4 className="text-sm font-semibold mb-2">
-										{task.userAddress}
+										{task.userAddress.slice(0, 15) + '...'}
 									</h4>
 								</div>
 								<div className="text-gray-400 mb-4 overflow-hidden">

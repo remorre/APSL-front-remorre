@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import {
 	beginCell,
@@ -244,7 +244,7 @@ export default function TransactionMenu({
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
 				className="ml-4 px-4 py-2 bg-white bg-opacity-20 text-white font-semibold rounded-md hover:bg-opacity-30 transition-colors flex items-center backdrop-blur-sm"
 			>
-				Transaction Menu <ChevronDown className="ml-2" />
+				Transaction Menu
 			</button>
 			<AnimatePresence>
 				{isMenuOpen && (

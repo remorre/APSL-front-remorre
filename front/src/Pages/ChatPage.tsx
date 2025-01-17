@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Send, ChevronLeft } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import io, { Socket } from 'socket.io-client';
@@ -113,11 +113,9 @@ export default function ChatPage() {
 	}, [chatId]);
 
 	useEffect(() => {
-		if (chatId) {
-			const selectedChat = chats.find(chat => chat.chatId === chatId);
-			if (selectedChat) {
-				setSelectedChat(selectedChat);
-			}
+		const selectedChat = chats.find(chat => chat.chatId === chatId);
+		if (selectedChat) {
+			setSelectedChat(selectedChat);
 		}
 	}, [chatId, chats]);
 
@@ -137,13 +135,9 @@ export default function ChatPage() {
 
 	useEffect(() => {
 		const updateChatHeight = () => {
-			const headerHeight = 80;
-			const footerHeight = 80;
 			const chatContainer = document.getElementById('chat-container');
 			if (chatContainer) {
-				chatContainer.style.height = `calc(100vh - ${
-					headerHeight + footerHeight
-				}px)`;
+				chatContainer.style.height = 'calc(100vh - 160px)'; // Assuming header and footer are 80px each
 			}
 		};
 
@@ -163,7 +157,7 @@ export default function ChatPage() {
 					'dispute',
 				][index];
 				const response = await axios.post(
-					'http://localhost:3000/update-transaction-stage',
+					'https://apslspace.run.place/update-transaction-stage',
 					{
 						chatId: selectedChat.chatId,
 						stage: stageName,
@@ -197,128 +191,139 @@ export default function ChatPage() {
 	return (
 		<div
 			id="chat-container"
-			className="flex flex-col md:flex-row bg-black bg-opacity-50 text-white p-4 overflow-hidden"
+			className="flex flex-col h-full bg-black bg-opacity-50 text-white overflow-hidden"
 		>
-			{/* Chat List */}
-			<motion.div
-				initial={{ opacity: 0, x: -20 }}
-				animate={{ opacity: 1, x: 0 }}
-				transition={{ duration: 0.5 }}
-				className={`w-full md:w-1/3 bg-white bg-opacity-10 p-4 overflow-y-auto rounded-lg md:mr-2 ${
-					selectedChat ? 'hidden md:block' : ''
-				} custom-scrollbar`}
-			>
-				<h2 className="text-2xl font-bold mb-4">Chats</h2>
-				{chats.map(chat => (
+			<AnimatePresence>
+				{!selectedChat && (
 					<motion.div
-						key={chat.chatId}
-						whileHover={{ scale: 1.02 }}
-						whileTap={{ scale: 0.98 }}
-						className="bg-white bg-opacity-10 p-4 rounded-lg mb-2 cursor-pointer"
-						onClick={() => navigate(`/chats/${chat.chatId}`)}
+						key="chat-list"
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: -20 }}
+						transition={{ duration: 0.3 }}
+						className="flex-grow overflow-y-auto p-8 custom-scrollbar"
 					>
-						<h3 className="font-semibold">{getChatName(chat)}</h3>
-						<p className="text-sm text-gray-300">
-							Click to view conversation
-						</p>
-					</motion.div>
-				))}
-			</motion.div>
-
-			{/* Chat Window */}
-			{selectedChat && (
-				<motion.div
-					key={selectedChat.chatId}
-					initial={{ opacity: 0, x: 20 }}
-					animate={{ opacity: 1, x: 0 }}
-					exit={{ opacity: 0, x: 20 }}
-					transition={{ duration: 0.5 }}
-					className="w-full md:w-2/3 flex flex-col bg-white bg-opacity-10 rounded-lg md:ml-2"
-				>
-					{/* Chat Header */}
-					<div className="bg-white bg-opacity-10 p-4 flex items-center justify-between rounded-t-lg">
-						<button
-							className="md:hidden mr-2"
-							onClick={() => navigate('/chats')}
-						>
-							<ChevronLeft size={24} />
-						</button>
-						<h2 className="text-xl font-semibold">
-							{getChatName(selectedChat)}
-						</h2>
-						<TransactionMenu
-							onStageAction={handleStageAction}
-							initialStages={{
-								send: selectedChat.send,
-								payment: selectedChat.payment,
-								finalize: selectedChat.finalize,
-								dispute: selectedChat.dispute,
-							}}
-							chatId={chatId}
-							dealer1={dealer}
-							address1={address}
-						/>
-					</div>
-
-					{/* Messages */}
-					<div className="flex-grow p-4 overflow-auto custom-scrollbar">
-						{messages.map(message => (
+						<h2 className="text-2xl font-bold mb-4">Chats</h2>
+						{chats.map(chat => (
 							<motion.div
-								key={`${message.chatId}-${message.timestamp}`} // Уникальный ключ
-								initial={{ opacity: 0, y: 10 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.3 }}
-								className={`mb-4 ${
-									message.sender === address
-										? 'text-right'
-										: 'text-left'
-								}`}
+								key={chat.chatId}
+								whileTap={{ scale: 0.98 }}
+								className="bg-white bg-opacity-10 p-4 rounded-lg mb-2 cursor-pointer"
+								onClick={() => {
+									setSelectedChat(chat);
+									navigate(`/chats/${chat.chatId}`);
+								}}
 							>
-								<div
-									className={`inline-block p-3 rounded-lg ${
-										message.sender === address
-											? 'bg-blue-600 bg-opacity-80'
-											: 'bg-white bg-opacity-10'
-									}`}
-								>
-									<p>{message.message}</p>
-									<span className="text-xs text-gray-400 mt-1 block">
-										{new Date(
-											message.timestamp,
-										).toLocaleTimeString([], {
-											hour: '2-digit',
-											minute: '2-digit',
-										})}
-									</span>
-								</div>
+								<h3 className="font-semibold">
+									{getChatName(chat)}
+								</h3>
+								<p className="text-sm text-gray-300">
+									Click to view conversation
+								</p>
 							</motion.div>
 						))}
-						<div ref={messagesEndRef} />
-					</div>
+					</motion.div>
+				)}
 
-					{/* Message Input */}
-					<div className="bg-white bg-opacity-10 p-4 rounded-b-lg">
-						<div className="flex items-center">
-							<input
-								type="text"
-								value={newMessage}
-								onChange={e => setNewMessage(e.target.value)}
-								onKeyDown={e =>
-									e.key === 'Enter' && handleSendMessage()
-								}
-								placeholder="Type your message..."
-								className="flex-grow px-4 py-2 bg-white bg-opacity-10 text-white rounded-md focus:outline-none"
-							/>
+				{selectedChat && (
+					<motion.div
+						key="chat-window"
+						initial={{ opacity: 0, x: 20 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: 20 }}
+						transition={{ duration: 0.3 }}
+						className="flex flex-col h-full p-8"
+					>
+						{/* Chat Header */}
+						<div className="bg-white bg-opacity-10 p-4 rounded-xl flex items-center justify-between">
 							<button
-								onClick={handleSendMessage}
-								className="px-4 py-2 bg-blue-600 bg-opacity-80 text-white rounded-md ml-1 hover:bg-opacity-100 focus:outline-none"
+								className="mr-2"
+								onClick={() => {
+									setSelectedChat(null);
+									navigate('/chats');
+								}}
 							>
-								<Send size={20} />
+								<ChevronLeft size={24} />
 							</button>
+							{/* <h2 className="text-xl font-semibold">
+								{getChatName(selectedChat)}
+							</h2> */}
+							<TransactionMenu
+								onStageAction={handleStageAction}
+								initialStages={{
+									send: selectedChat.send,
+									payment: selectedChat.payment,
+									finalize: selectedChat.finalize,
+									dispute: selectedChat.dispute,
+								}}
+								chatId={chatId}
+								dealer1={dealer}
+								address1={address}
+							/>
 						</div>
-					</div>
-				</motion.div>
-			)}
+
+						{/* Messages */}
+						<div className="flex-grow p-4 overflow-y-auto custom-scrollbar">
+							{messages.map(message => (
+								<motion.div
+									key={`${message.chatId}-${message.timestamp}`}
+									initial={{ opacity: 0, y: 10 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.3 }}
+									className={`mb-4 ${
+										message.sender === address
+											? 'text-right'
+											: 'text-left'
+									}`}
+								>
+									<div
+										className={`inline-block p-3 rounded-lg ${
+											message.sender === address
+												? 'bg-blue-600 bg-opacity-80'
+												: 'bg-white bg-opacity-10'
+										}`}
+									>
+										<p>{message.message}</p>
+										<span className="text-xs text-gray-400 mt-1 block">
+											{new Date(
+												message.timestamp,
+											).toLocaleTimeString([], {
+												hour: '2-digit',
+												minute: '2-digit',
+											})}
+										</span>
+									</div>
+								</motion.div>
+							))}
+							<div ref={messagesEndRef} />
+						</div>
+
+						{/* Message Input */}
+						<div className="bg-white bg-opacity-10 p-4 rounded-xl">
+							<div className="flex items-center">
+								<input
+									type="text"
+									value={newMessage}
+									onChange={e =>
+										setNewMessage(e.target.value)
+									}
+									onKeyDown={e =>
+										e.key === 'Enter' && handleSendMessage()
+									}
+									placeholder="Type your message..."
+									className="flex-grow px-4 py-2 bg-white bg-opacity-10 text-white rounded-md focus:outline-none"
+								/>
+								<button
+									onClick={handleSendMessage}
+									className="px-4 py-2 bg-blue-600 bg-opacity-80 text-white rounded-md ml-1 hover:bg-opacity-100 focus:outline-none"
+								>
+									<Send size={20} />
+								</button>
+							</div>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 }
