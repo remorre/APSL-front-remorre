@@ -242,7 +242,7 @@ export default function TransactionMenu({
 		<div className="relative" ref={menuRef}>
 			<button
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
-				className="ml-4 px-4 py-2 bg-white bg-opacity-20 text-white font-semibold rounded-md hover:bg-opacity-30 transition-colors flex items-center backdrop-blur-sm"
+				className="ml-4 px-4 py-2 bg-white bg-opacity-20 text-black font-semibold rounded-md hover:bg-opacity-30 transition-colors flex items-center backdrop-blur-sm"
 			>
 				Transaction Menu
 			</button>
