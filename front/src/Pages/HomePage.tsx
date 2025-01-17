@@ -82,7 +82,7 @@ export default function HomePage() {
 		},
 		{
 			question: 'What are the fees for using the platform?',
-			answer: 'We charge a low 1.5% fee on each transaction, ensuring you keep the majority of your earnings.',
+			answer: 'We charge a low 5% fee on each transaction, ensuring you keep the majority of your earnings.',
 		},
 		{
 			question: 'What does the 4-stage deal represent?',
