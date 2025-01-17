@@ -10,7 +10,7 @@ import {
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import HomePage from './Pages/HomePage';
-import AnimatedBackground from './Components/Animate';
+import Animate from './Components/Animate';
 import NotFoundPage from './Pages/NotFoundPage';
 import ExchengePage from './Pages/ExchengePage';
 import ChatPage from './Pages/ChatPage';
@@ -42,7 +42,7 @@ function App() {
 		<div className="min-h-screen flex flex-col text-white bg-black">
 			<TonConnectUIProvider manifestUrl="https://apsl/tonconnect-manifest.json">
 				<WalletChecker>
-					<AnimatedBackground className="z-2" />
+					<Animate className="fixed inset-0 z-0" />
 					<Header isWalletConnected={isWalletConnected} />
 					<main className="flex-grow">
 						<Routes>

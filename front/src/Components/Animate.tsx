@@ -1,58 +1,11 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-interface AnimatedBackgroundProps {
+interface AnimateProps {
 	className?: string;
 }
 
-class Star {
-	x: number;
-	y: number;
-	radius: number;
-	color: string;
-	dy: number;
-
-	constructor(x?: number, y?: number, radius?: number, color?: string) {
-		this.x = x || Math.random() * window.innerWidth;
-		this.y = y || Math.random() * window.innerHeight;
-		this.radius = radius || Math.random() * 0.9;
-		this.color =
-			color ||
-			['#176ab6', '#f8bab6', '#fff', '#49d1f6', '#e4a8e6'][
-				Math.floor(Math.random() * 5)
-			];
-		this.dy = -Math.random() * 0.23;
-	}
-
-	draw(ctx: CanvasRenderingContext2D) {
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-		ctx.shadowBlur = Math.floor(Math.random() * 13) + 3; // Random shadow blur
-		ctx.shadowColor = this.color;
-		ctx.strokeStyle = this.color;
-		ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-		ctx.fill();
-		ctx.stroke();
-		ctx.closePath();
-	}
-
-	update(ctx: CanvasRenderingContext2D, stars: Star[]) {
-		if (this.y - this.radius < 0) this.createNewStar(stars);
-		this.y += this.dy;
-		this.draw(ctx);
-	}
-
-	createNewStar(stars: Star[]) {
-		const index = stars.indexOf(this);
-		stars.splice(index, 1);
-		stars.push(new Star(undefined, window.innerHeight + 5));
-	}
-}
-
-const AnimatedBackground: React.FC<AnimatedBackgroundProps> = () => {
+const Animate: React.FC<AnimateProps> = ({ className }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const stars: Star[] = [];
-	const n_stars = 250;
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -64,36 +17,45 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = () => {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
-		// Gradient background
-		const bg = ctx.createRadialGradient(
-			canvas.width / 2,
-			canvas.height * 3,
-			canvas.height,
-			canvas.width / 2,
-			canvas.height,
-			canvas.height * 4,
-		);
-		bg.addColorStop(0, '#32465E');
-		bg.addColorStop(0.4, '#000814');
-		bg.addColorStop(0.8, '#000814');
-		bg.addColorStop(1, '#000');
+		const konkani =
+			'゠アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレワヰヱヲンヺ・ーヽヿ0123456789';
+		const characters = konkani.split('');
+		const font_size = 14;
+		const columns = canvas.width / font_size;
+		const drops: number[] = Array(Math.floor(columns)).fill(1);
 
-		// Initialize stars
-		for (let i = 0; i < n_stars; i++) {
-			stars.push(new Star());
-		}
+		const root = {
+			matrixspeed: 50, // Скорость анимации
+		};
 
-		function animate() {
-			if (!ctx) return;
-			if (!canvas) return;
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.fillStyle = bg;
+		const draw = () => {
+			// Очистка холста с полупрозрачным черным фоном для эффекта "шлейфа"
+			ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
-			stars.forEach(star => star.update(ctx, stars)); // Передаем ctx в update
-			requestAnimationFrame(animate);
-		}
 
-		animate();
+			// Устанавливаем кроваво-красный цвет для текста
+			ctx.fillStyle = '#8B0000'; // Кроваво-красный цвет
+			ctx.font = `${font_size}px arial`;
+
+			for (let i = 0; i < drops.length; i++) {
+				const text =
+					characters[Math.floor(Math.random() * characters.length)];
+				ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+				// Перемещение капли вниз
+				drops[i]++;
+
+				// Если капля вышла за пределы экрана, возвращаем её в начало
+				if (
+					drops[i] * font_size > canvas.height &&
+					Math.random() > 0.975
+				) {
+					drops[i] = 0;
+				}
+			}
+		};
+
+		const interval = setInterval(draw, root.matrixspeed);
 
 		const handleResize = () => {
 			canvas.width = window.innerWidth;
@@ -103,11 +65,12 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = () => {
 		window.addEventListener('resize', handleResize);
 
 		return () => {
+			clearInterval(interval);
 			window.removeEventListener('resize', handleResize);
 		};
-	}, [stars]);
+	}, []);
 
-	return <canvas ref={canvasRef} className="fixed inset-0 z-0" />;
+	return <canvas ref={canvasRef} className={className} />;
 };
 
-export default AnimatedBackground;
+export default Animate;
