@@ -72,9 +72,9 @@ export default function TaskDetailsModal({
 				initial={{ scale: 0.9, opacity: 0 }}
 				animate={{ scale: 1, opacity: 1 }}
 				exit={{ scale: 0.9, opacity: 0 }}
-				className="bg-black border-2 border-gray-500 font-medium rounded-lg  w-full max-w-2xl relative flex flex-col"
+				className="bg-black border-2 border-gray-500 font-medium rounded-lg w-full max-w-2xl relative flex flex-col h-[90vh] overflow-hidden"
 			>
-				<div className="p-8">
+				<div className="p-8 overflow-y-auto flex-1 touch-action-y">
 					<button
 						onClick={onClose}
 						className="absolute top-4 right-4 text-white hover:text-gray-300"
