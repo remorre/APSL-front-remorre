@@ -115,11 +115,11 @@ export default function TaskDetailsModal({
 							</div>
 						)}
 						{task.userAddress && (
-							<div>
+							<div className="w-full">
 								<h3 className="text-xl font-semibold text-white mb-2">
 									Customer wallet:
 								</h3>
-								<p className="text-gray-300 w-full">
+								<p className="text-gray-300">
 									{task.userAddress}
 								</p>
 							</div>
