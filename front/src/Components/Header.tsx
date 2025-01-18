@@ -26,7 +26,7 @@ const NavigationArrow = () => {
 const Header = ({ isWalletConnected }: { isWalletConnected: boolean }) => {
 	const location1 = useLocation();
 	return (
-		<header className="mb-auto top-0 left-0 right-0 flex justify-between items-center p-6 px-8 bg-black bg-opacity-50 backdrop-blur-0 z-10">
+		<header className="mb-auto top-0 left-0 right-0 flex justify-between items-center p-6 px-8 bg-black bg-opacity-50 backdrop-blur-0 z-1">
 			{location1.pathname === '/' && (
 				<Link
 					to="/"
