@@ -81,11 +81,11 @@ export default function TaskDetailsModal({
 					>
 						<X size={24} />
 					</button>
-					<h2 className="text-3xl font-bold text-white mb-6">
+					<h2 className="text-3xl font-bold break-words overflow-hidden text-white mb-6">
 						{task.title}
 					</h2>
 					<div className="space-y-4">
-						<p className="text-gray-300 whitespace-pre-wrap">
+						<p className="text-gray-300 break-words overflow-hidden whitespace-pre-wrap">
 							{task.description}
 						</p>
 						<div className="flex justify-between">
@@ -97,15 +97,17 @@ export default function TaskDetailsModal({
 							</span>
 						</div>
 						{task.skills && (
-							<div>
+							<div className="w-full">
 								<h3 className="text-xl font-semibold text-white mb-2">
 									Required Skills:
 								</h3>
-								<p className="text-gray-300">{task.skills}</p>
+								<p className="text-gray-300 break-words overflow-hidden">
+									{task.skills}
+								</p>
 							</div>
 						)}
 						{task.deadline && (
-							<div>
+							<div className="w-full">
 								<h3 className="text-xl font-semibold text-white mb-2">
 									Deadline:
 								</h3>
