@@ -119,7 +119,7 @@ export default function TaskDetailsModal({
 								<h3 className="text-xl font-semibold text-white mb-2">
 									Customer wallet:
 								</h3>
-								<p className="text-gray-300">
+								<p className="text-gray-300 w-full">
 									{task.userAddress}
 								</p>
 							</div>
