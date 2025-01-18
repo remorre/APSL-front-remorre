@@ -1,37 +1,41 @@
 import { TonConnectButton } from '@tonconnect/ui-react';
+import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronsUp } from 'lucide-react';
-import { ChevronsDown } from 'lucide-react';
 
 const NavigationArrow = () => {
 	const location = useLocation();
 
-	const targetRoute = location.pathname === '/chats' ? '/exchenge' : '/chats';
+	const targetRoute =
+		location.pathname === '/exchenge' ? '/chats' : '/exchenge';
 
 	return (
-		<Link
-			to={targetRoute}
-			className="ml-4 p-1 bg-opacity-20 bg-white rounded-sm hover:bg-opacity-90 transition-all duration-300 hover:translate-y-1"
-		>
+		<Link to={targetRoute}>
 			{location.pathname === '/exchenge' ? (
-				<ChevronsDown className="w-6 h-6 text-white hover:text-black" />
+				<motion.button className="w-24 h-10 flex items-center justify-center bg-white text-black font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
+					Chats
+				</motion.button>
 			) : (
-				<ChevronsUp className="w-6 h-6 text-white hover:text-black" />
+				<motion.button className="w-24 h-10 flex items-center justify-center bg-white text-black font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
+					Exchange
+				</motion.button>
 			)}
 		</Link>
 	);
 };
 
 const Header = ({ isWalletConnected }: { isWalletConnected: boolean }) => {
+	const location1 = useLocation();
 	return (
 		<header className="mb-auto top-0 left-0 right-0 flex justify-between items-center p-6 px-8 bg-black bg-opacity-50 backdrop-blur-0 z-10">
-			<Link
-				to="/"
-				className="text-3xl font-bold tracking-wider font-orbitron"
-				style={{ fontFamily: 'Orbitron, sans-serif' }}
-			>
-				APSL
-			</Link>
+			{location1.pathname === '/' && (
+				<Link
+					to="/"
+					className="text-3xl font-bold tracking-wider font-orbitron"
+					style={{ fontFamily: 'Orbitron, sans-serif' }}
+				>
+					APSL
+				</Link>
+			)}
 			{isWalletConnected && <NavigationArrow />}
 			<div
 				className="

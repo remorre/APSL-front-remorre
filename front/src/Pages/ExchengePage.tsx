@@ -153,9 +153,9 @@ export default function ExchengePage() {
 									<h4 className="text-xl font-semibold mb-2">
 										{task.title}
 									</h4>
-									<h4 className="text-sm font-semibold mb-2">
+									{/* <h4 className="text-sm font-semibold mb-2">
 										{task.userAddress.slice(0, 15) + '...'}
-									</h4>
+									</h4> */}
 								</div>
 								<div className="text-gray-400 mb-4 overflow-hidden">
 									<p
@@ -228,7 +228,7 @@ export default function ExchengePage() {
 							initial={{ scale: 0.9, opacity: 0 }}
 							animate={{ scale: 1, opacity: 1 }}
 							exit={{ scale: 0.9, opacity: 0 }}
-							className="bg-gray-900 p-8 rounded-lg w-full max-w-2xl relative"
+							className="bg-black border-2 border-gray-500 p-8 rounded-lg w-1/2 max-w-2xl relative"
 						>
 							<button
 								onClick={closeModal}

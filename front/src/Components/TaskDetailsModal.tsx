@@ -72,7 +72,7 @@ export default function TaskDetailsModal({
 				initial={{ scale: 0.9, opacity: 0 }}
 				animate={{ scale: 1, opacity: 1 }}
 				exit={{ scale: 0.9, opacity: 0 }}
-				className="bg-gray-900 rounded-lg w-full max-w-2xl relative flex flex-col"
+				className="bg-black border-2 border-gray-500 font-medium rounded-lg max-w-2xl relative flex flex-col"
 			>
 				<div className="p-8">
 					<button
@@ -130,7 +130,7 @@ export default function TaskDetailsModal({
 					<motion.button
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+						className="w-full px-4 py-2 bg-white text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
 						onClick={handleChatClick}
 						disabled={isLoading}
 					>

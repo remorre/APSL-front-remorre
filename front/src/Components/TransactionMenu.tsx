@@ -242,7 +242,7 @@ export default function TransactionMenu({
 		<div className="relative" ref={menuRef}>
 			<button
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
-				className="ml-4 px-4 py-2 bg-white bg-opacity-20 text-black font-semibold rounded-md hover:bg-opacity-30 transition-colors flex items-center backdrop-blur-sm"
+				className="ml-4 px-4 py-2 bg-white text-black font-semibold rounded-md hover:bg-opacity-30 transition-colors flex items-center backdrop-blur-sm"
 			>
 				Transaction Menu
 			</button>
@@ -252,7 +252,7 @@ export default function TransactionMenu({
 						initial={{ opacity: 0, y: -10 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -10 }}
-						className="absolute right-0 mt-2 w-64 bg-gray-800 rounded-md shadow-lg z-10 border-2 border-gray-500"
+						className="absolute right-0 mt-2 w-64 bg-black rounded-md shadow-lg z-10 border-2 border-gray-500"
 					>
 						{transactionStages.map((stage, index) => (
 							<div

@@ -77,7 +77,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-6">
+		<form onSubmit={handleSubmit} className="space-y-6 ">
 			<h2 className="text-3xl font-bold text-white mb-6">
 				Create New Task
 			</h2>
@@ -96,7 +96,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					value={formData.title}
 					onChange={handleChange}
 					required
-					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:focus:ring-white focus:border-transparent"
 				/>
 			</div>
 
@@ -114,7 +114,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					onChange={handleChange}
 					required
 					rows={4}
-					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:focus:ring-white focus:border-transparent"
 				></textarea>
 			</div>
 
@@ -131,7 +131,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					value={formData.category}
 					onChange={handleChange}
 					required
-					className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
 				>
 					<option value="" disabled>
 						Select a category
@@ -140,7 +140,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 						<option
 							key={category}
 							value={category}
-							className="bg-gray-800"
+							className="bg-black"
 						>
 							{category}
 						</option>
@@ -162,7 +162,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					value={formData.skills}
 					onChange={handleChange}
 					required
-					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
 				/>
 			</div>
 
@@ -182,7 +182,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					required
 					min="0"
 					step="0.1"
-					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
 				/>
 			</div>
 
@@ -200,7 +200,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					value={formData.deadline}
 					onChange={handleChange}
 					required
-					className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					className="mt-1 block w-full px-3 py-2 bg-white bg-opacity-10 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
 				/>
 			</div>
 
@@ -219,7 +219,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 					whileTap={{ scale: 0.95 }}
 					type="submit"
 					disabled={isSubmitting}
-					className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50"
+					className="px-4 py-2 bg-white text-black rounded-md focus:outline-none focus:ring-2  focus:ring-offset-2  disabled:opacity-50"
 				>
 					{isSubmitting ? 'Submitting...' : 'Create Task'}
 				</motion.button>
