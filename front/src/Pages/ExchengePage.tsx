@@ -150,7 +150,7 @@ export default function ExchengePage() {
 								className="bg-white bg-opacity-10 p-6 rounded-lg cursor-pointer"
 							>
 								<div className="flex justify-between">
-									<h4 className="text-xl font-semibold mb-2">
+									<h4 className="text-xl break-words overflow-hidden font-semibold mb-2">
 										{task.title}
 									</h4>
 									{/* <h4 className="text-sm font-semibold mb-2">
