@@ -44,7 +44,7 @@ function App() {
 				<WalletChecker>
 					<Animate className="fixed inset-0 z-0" />
 					<Header isWalletConnected={isWalletConnected} />
-					<main className="flex-grow">
+					<main className="flex-grow relative z-10">
 						<Routes>
 							<Route path="/" element={<HomePage />} />
 							<Route
