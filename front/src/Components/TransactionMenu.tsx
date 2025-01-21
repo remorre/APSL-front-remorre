@@ -313,8 +313,8 @@ export default function TransactionMenu({
 										((stage.completed ||
 											initialStages.payment < 1) &&
 											index == 3)
-											? 'bg-green-600 text-white cursor-not-allowed'
-											: 'bg-blue-600 text-white hover:bg-blue-700'
+											? 'bg-white text-black font-normal cursor-not-allowed'
+											: 'bg-black border text-white '
 									}`}
 								>
 									{stage.completed

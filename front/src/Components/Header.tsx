@@ -11,11 +11,11 @@ const NavigationArrow = () => {
 	return (
 		<Link to={targetRoute}>
 			{location.pathname === '/exchenge' ? (
-				<motion.button className="w-24 h-10 flex items-center justify-center bg-white text-black font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
+				<motion.button className="w-24 h-10 flex items-center justify-center bg-black text-white border font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
 					Chats
 				</motion.button>
 			) : (
-				<motion.button className="w-24 h-10 flex items-center justify-center bg-white text-black font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
+				<motion.button className="w-24 h-10 flex items-center justify-center bg-black text-white border font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl">
 					Exchange
 				</motion.button>
 			)}
