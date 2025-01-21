@@ -102,14 +102,14 @@ export default function TransactionMenu({
 	const transaction = async (index: number) => {
 		let address: any;
 		const response1 = await axios.get(
-			`https://apslspace.run.place/get-dealer-customer/${chatId}`,
+			`https://apslexchenge.ru/get-dealer-customer/${chatId}`,
 		);
 		if (index === 0) {
 			const dealer = response1.data.dealer;
 			const customer = response1.data.customer;
 
 			const response = await axios.post(
-				'https://apslspace.run.place/compile',
+				'https://apslexchenge.ru/compile',
 				{
 					dealer: dealer,
 					customer: customer,
@@ -134,7 +134,7 @@ export default function TransactionMenu({
 				],
 			});
 
-			await axios.post('https://apslspace.run.place/update-address', {
+			await axios.post('https://apslexchenge.ru/update-address', {
 				chatId: chatId,
 				address: address.toRawString(),
 			});
@@ -142,14 +142,14 @@ export default function TransactionMenu({
 
 		const getAddress = async () => {
 			const response = await axios.get(
-				`https://apslspace.run.place/get-address/${chatId}`,
+				`https://apslexchenge.ru/get-address/${chatId}`,
 			);
 			return response.data.address;
 		};
 
 		const getReward = async () => {
 			const response = await axios.get(
-				`https://apslspace.run.place/get-reward/${chatId}`,
+				`https://apslexchenge.ru/get-reward/${chatId}`,
 			);
 			return response.data.reward;
 		};

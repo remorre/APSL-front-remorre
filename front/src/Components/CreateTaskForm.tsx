@@ -58,7 +58,7 @@ export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
 			console.log('Sending data:', dataToSend);
 
 			const response = await axios.post(
-				'https://apslspace.run.place/newtask',
+				'https://apslexchenge.ru/newtask',
 				dataToSend,
 				{
 					headers: {

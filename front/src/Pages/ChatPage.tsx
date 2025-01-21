@@ -39,7 +39,7 @@ export default function ChatPage() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		socketRef.current = io('https://apslspace.run.place');
+		socketRef.current = io('https://apslexchenge.ru');
 
 		socketRef.current.on('connect', () => {
 			console.log('Connected to server');
@@ -64,7 +64,7 @@ export default function ChatPage() {
 			if (chatId) {
 				try {
 					const response = await axios.get(
-						`https://apslspace.run.place/${chatId}`,
+						`https://apslexchenge.ru/${chatId}`,
 					);
 					setDealer(response.data.dealer);
 				} catch (error) {
@@ -80,7 +80,7 @@ export default function ChatPage() {
 		const fetchChats = async () => {
 			try {
 				const response = await axios.get(
-					'https://apslspace.run.place/get-chats',
+					'https://apslexchenge.ru/get-chats',
 					{
 						params: { currentUserAddress: address },
 					},
@@ -100,7 +100,7 @@ export default function ChatPage() {
 				setIsLoading(true);
 				try {
 					const response = await fetch(
-						`https://apslspace.run.place/get-messages/${chatId}`,
+						`https://apslexchenge.ru/get-messages/${chatId}`,
 					);
 					const data = await response.json();
 					setMessages(data);

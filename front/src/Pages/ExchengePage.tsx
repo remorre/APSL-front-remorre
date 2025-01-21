@@ -44,7 +44,7 @@ export default function ExchengePage() {
 		const fetchTasks = async () => {
 			try {
 				const response = await axios.get(
-					'https://apslspace.run.place/gettasks',
+					'https://apslexchenge.ru/gettasks',
 				);
 				setTasks(response.data);
 			} catch (error) {

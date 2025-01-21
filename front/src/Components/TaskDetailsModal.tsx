@@ -34,7 +34,7 @@ export default function TaskDetailsModal({
 		setIsLoading(true);
 		try {
 			const response = await axios.post(
-				'https://apslspace.run.place/check-or-create-chat',
+				'https://apslexchenge.ru/check-or-create-chat',
 				{
 					userAddress: task.userAddress,
 					currentUserAddress: address,
